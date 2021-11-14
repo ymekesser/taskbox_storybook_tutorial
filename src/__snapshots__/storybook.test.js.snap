@@ -757,3 +757,36 @@ exports[`Storyshots TaskList With Pinned Tasks 1`] = `
   </div>
 </div>
 `;
+
+exports[`Storyshots TestComponent Default 1`] = `
+<div
+  style={
+    Object {
+      "padding": "3rem",
+    }
+  }
+>
+  <div>
+    <span>
+      Your text: 
+      Hello World
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Storyshots TestComponent No Text 1`] = `
+<div
+  style={
+    Object {
+      "padding": "3rem",
+    }
+  }
+>
+  <div>
+    <span>
+      There is no text
+    </span>
+  </div>
+</div>
+`;

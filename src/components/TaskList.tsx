@@ -1,11 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 
-import Task from './Task';
+import { Task, TaskState } from './Task';
 import { connect } from 'react-redux';
 import { archiveTaskAction, pinTaskAction } from '../lib/redux';
 
-export function PureTaskList({ loading, tasks, onPinTask, onArchiveTask }) {
+export interface TaskListProps {
+    loading: boolean;
+    tasks: TaskState[];
+    onArchiveTask: (id: string) => void;
+    onPinTask: (id: string) => void;
+};
+
+export const PureTaskList: FC<TaskListProps> = ({ loading, tasks, onPinTask, onArchiveTask }) => {
     const events = {
         onPinTask,
         onArchiveTask,
@@ -29,7 +35,7 @@ export function PureTaskList({ loading, tasks, onPinTask, onArchiveTask }) {
     );
 }
 
-function sortTasks(tasks) {
+function sortTasks(tasks: TaskState[]) {
     return [
         ...tasks.filter(t => t.state === 'TASK_PINNED'),
         ...tasks.filter(t => t.state !== 'TASK_PINNED'),
@@ -68,26 +74,12 @@ const EmptyPlaceholder = (
     </div>
 )
 
-PureTaskList.propTypes = {
- /** Checks if it's in loading state */
- loading: PropTypes.bool,
- /** The list of tasks */
- tasks: PropTypes.arrayOf(Task.propTypes.task).isRequired,
- /** Event to change the task to pinned */
- onPinTask: PropTypes.func,
- /** Event to change the task to archived */
- onArchiveTask: PropTypes.func,
-};
-PureTaskList.defaultProps = {
- loading: false,
-};
-
 export default connect(
-    ({tasks}) => ({
-        tasks: tasks.filter(t => t.state === 'TASK_INBOX' || t.state === 'TASK_PINNED'),
+    ({ tasks }: any) => ({
+        tasks: tasks.filter((t: TaskState) => t.state === 'TASK_INBOX' || t.state === 'TASK_PINNED'),
     }),
     dispatch => ({
-        onArchiveTask: id => dispatch(archiveTaskAction(id)),
-        onPinTask: id => dispatch(pinTaskAction(id)),
+        onArchiveTask: (id: string) => dispatch(archiveTaskAction(id)),
+        onPinTask: (id: string) => dispatch(pinTaskAction(id)),
     })
 )(PureTaskList)
