@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
 
+export type State = 'TASK_INBOX' | 'TASK_PINNED' | 'TASK_ARCHIVED';
+
 export interface TaskState {
     id: string;
     title: string;
-    state: string; // TODO Update
+    state: State;
 }
 
 export interface TaskProps {

@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { PureTaskList, TaskListProps } from './TaskList';
+import * as TaskStories from './Task.stories'
+import { Story } from '@storybook/react';
 
 export default {
     component: PureTaskList,
@@ -8,47 +10,45 @@ export default {
     decorators: [(story: any) => <div style={{ padding: '3rem' }}>{story()}</div>]
 }
 
-const defaultTaskArgs = {
-    id: '1',
-    title: 'Test Task',
-    state: 'TASK_INBOX',
-}
-
-
 const defaultArgs: TaskListProps = {
     loading: false,
     onArchiveTask: (_: string) => { },
     onPinTask: (_: string) => { },
     tasks: [
-        { ...defaultTaskArgs, id: '1', title: 'Task 1' },
-        { ...defaultTaskArgs, id: '2', title: 'Task 2' },
-        { ...defaultTaskArgs, id: '3', title: 'Task 3' },
-        { ...defaultTaskArgs, id: '4', title: 'Task 4' },
-        { ...defaultTaskArgs, id: '5', title: 'Task 5' },
-        { ...defaultTaskArgs, id: '6', title: 'Task 6' },
+        { ...TaskStories.Default.args!.task!, id: '1', title: 'Task 1' },
+        { ...TaskStories.Default.args!.task!, id: '2', title: 'Task 2' },
+        { ...TaskStories.Default.args!.task!, id: '3', title: 'Task 3' },
+        { ...TaskStories.Default.args!.task!, id: '4', title: 'Task 4' },
+        { ...TaskStories.Default.args!.task!, id: '5', title: 'Task 5' },
+        { ...TaskStories.Default.args!.task!, id: '6', title: 'Task 6' },
     ]
 };
 
-const Template = (args: TaskListProps) => () => <PureTaskList {...args} />;
+const Template: Story<TaskListProps> = (args) => <PureTaskList {...args} />;
 
-export const Default = Template(defaultArgs);
+export const Default = Template.bind({});
+Default.args = defaultArgs;
 
-export const WithPinnedTasks = Template({
+
+export const WithPinnedTasks = Template.bind({});
+WithPinnedTasks.args = {
     ...defaultArgs,
     tasks: [
         ...defaultArgs.tasks.slice(0, 4),
         { id: '6', title: 'Task 6 (pinned)', state: 'TASK_PINNED' }
     ]
-});
+};
 
-export const Loading = Template({
+export const Loading = Template.bind({});
+Loading.args = {
     ...defaultArgs,
     tasks: [],
     loading: true,
-});
+};
 
-export const Empty = Template({
+export const Empty = Template.bind({});
+Empty.args = {
     ...defaultArgs,
     tasks: [],
     loading: false,
-});
+};
