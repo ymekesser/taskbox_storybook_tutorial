@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 
 export interface TaskState {
     id: string;
@@ -32,7 +31,6 @@ export const Task: FC<TaskProps> = ({ task: { id, title, state }, onArchiveTask,
 
             <div className="actions" onClick={event => event.stopPropagation()}>
                 {state !== 'TASK_ARCHIVED' && (
-                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
                     <a onClick={() => onPinTask(id)}>
                         <span className={`icon-star`} />
                     </a>

@@ -13,8 +13,8 @@ const defaultArgs = {
         title: 'Test Task',
         state: 'TASK_INBOX',
     },
-    onArchiveTask: (x: string) => { },
-    onPinTask: (x: string) => { },
+    onArchiveTask: (_: string) => { },
+    onPinTask: (_: string) => { },
 };
 
 const Template = (args: TaskProps) => () => <Task {...args} />;

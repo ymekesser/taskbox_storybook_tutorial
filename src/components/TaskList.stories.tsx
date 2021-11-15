@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { PureTaskList, TaskListProps } from './TaskList';
-import * as TaskStories from './Task.stories';
 
 export default {
     component: PureTaskList,
@@ -18,8 +17,8 @@ const defaultTaskArgs = {
 
 const defaultArgs: TaskListProps = {
     loading: false,
-    onArchiveTask: (x: string) => { },
-    onPinTask: (x: string) => { },
+    onArchiveTask: (_: string) => { },
+    onPinTask: (_: string) => { },
     tasks: [
         { ...defaultTaskArgs, id: '1', title: 'Task 1' },
         { ...defaultTaskArgs, id: '2', title: 'Task 2' },

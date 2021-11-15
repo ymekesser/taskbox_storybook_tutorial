@@ -9,7 +9,7 @@ export interface TaskListProps {
     tasks: TaskState[];
     onArchiveTask: (id: string) => void;
     onPinTask: (id: string) => void;
-};
+}
 
 export const PureTaskList: FC<TaskListProps> = ({ loading, tasks, onPinTask, onArchiveTask }) => {
     const events = {
@@ -75,7 +75,7 @@ const EmptyPlaceholder = (
 )
 
 export default connect(
-    ({ tasks }: any) => ({
+    ({ tasks }: TaskListProps) => ({
         tasks: tasks.filter((t: TaskState) => t.state === 'TASK_INBOX' || t.state === 'TASK_PINNED'),
     }),
     dispatch => ({
